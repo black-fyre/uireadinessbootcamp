@@ -210,4 +210,4 @@ For questions or support, please contact The Breakforth Group.
 - Venue: University of Ibadan Campus
 - Registration: ₦1,000
 
-**Register Now:** [bit.ly/uicareerreadinessbootcamp](https://bit.ly/uicareerreadinessbootcamp)
+**Register Now:** [bit.ly/uicareerbootcamp](https://bit.ly/uicareerbootcamp)
