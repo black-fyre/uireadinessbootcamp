@@ -1,12 +1,15 @@
 'use client';
 
 import { useEffect, useRef, useState } from 'react';
+import Image from 'next/image';
 
 const tracks = [
   {
     icon: '🎯',
     title: 'Career Track',
     color: 'blue',
+    gradient: 'from-green-500 to-emerald-500',
+    image: 'https://images.unsplash.com/photo-1551836022-deb4988cc6c0?w=800&h=600&fit=crop',
     features: [
       'Resume Building: Craft compelling resumes that stand out',
       'Interview Preparation: Master the art of acing job interviews',
@@ -17,6 +20,8 @@ const tracks = [
     icon: '💼',
     title: 'Business Track',
     color: 'purple',
+    gradient: 'from-teal-500 to-cyan-500',
+    image: 'https://images.unsplash.com/photo-1664575602554-2087b04935a5?w=800&h=600&fit=crop',
     features: [
       'Starting Your Business: From idea to execution',
       'Finance 101: Financing strategies for your business',
@@ -27,6 +32,8 @@ const tracks = [
     icon: '🎨',
     title: 'Creative Track',
     color: 'pink',
+    gradient: 'from-emerald-500 to-green-600',
+    image: 'https://images.unsplash.com/photo-1626785774625-ddcddc3445e9?w=800&h=600&fit=crop',
     features: [
       'Building Your Brand: Personal and business branding essentials',
       'Creative portfolio development',
@@ -37,6 +44,7 @@ const tracks = [
 
 export default function Tracks() {
   const [isVisible, setIsVisible] = useState(false);
+  const [hoveredCard, setHoveredCard] = useState<number | null>(null);
   const sectionRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
@@ -61,65 +69,107 @@ export default function Tracks() {
   }, []);
 
   return (
-    <section id="tracks" ref={sectionRef} className="py-20 sm:py-32 bg-gradient-to-b from-gray-50 to-white">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+    <section id="tracks" ref={sectionRef} className="relative py-20 sm:py-32 bg-gradient-to-b from-slate-900 via-emerald-950/30 to-slate-900 overflow-hidden">
+      {/* Animated background elements */}
+      <div className="absolute inset-0 bg-grid-pattern opacity-10"></div>
+      <div className="absolute top-1/4 left-0 w-96 h-96 bg-green-500/10 rounded-full filter blur-3xl animate-float-slow"></div>
+      <div className="absolute bottom-1/4 right-0 w-96 h-96 bg-emerald-500/10 rounded-full filter blur-3xl animate-float-delayed"></div>
+
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className={`transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
           {/* Section Header */}
-          <div className="text-center mb-16">
-            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900 mb-4">
-              Three Learning Tracks
+          <div className="text-center mb-20">
+            <div className="inline-block mb-4 px-4 py-2 bg-gradient-to-r from-green-500/20 to-emerald-500/20 backdrop-blur-sm border border-green-400/30 rounded-full">
+              <span className="text-sm font-semibold text-green-300 tracking-wide uppercase">Workshop Tracks</span>
+            </div>
+            <h2 className="text-4xl sm:text-5xl md:text-6xl font-black text-white mb-6">
+              Three Learning <span className="text-transparent bg-clip-text bg-gradient-to-r from-green-400 to-emerald-500">Tracks</span>
             </h2>
-            <div className="w-20 h-1 bg-gradient-to-r from-blue-600 to-purple-600 mx-auto mb-6"></div>
-            <p className="text-lg sm:text-xl text-gray-600 max-w-3xl mx-auto">
+            <p className="text-xl sm:text-2xl text-gray-300 max-w-3xl mx-auto leading-relaxed">
               Choose your path to success with our specialized workshop tracks
             </p>
           </div>
 
           {/* Tracks Grid */}
-          <div className="grid md:grid-cols-3 gap-8 max-w-7xl mx-auto">
+          <div className="grid lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
             {tracks.map((track, index) => (
               <div
                 key={index}
-                className={`bg-white rounded-2xl p-8 shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 border-t-4 ${
-                  track.color === 'blue' ? 'border-blue-500' :
-                  track.color === 'purple' ? 'border-purple-500' :
-                  'border-pink-500'
-                }`}
-                style={{ transitionDelay: `${index * 100}ms` }}
+                className="group relative"
+                onMouseEnter={() => setHoveredCard(index)}
+                onMouseLeave={() => setHoveredCard(null)}
+                style={{
+                  animation: isVisible ? `slide-up 0.6s ease-out ${index * 150}ms both` : 'none'
+                }}
               >
-                {/* Icon */}
-                <div className={`w-16 h-16 rounded-2xl flex items-center justify-center text-3xl mb-6 ${
-                  track.color === 'blue' ? 'bg-blue-100' :
-                  track.color === 'purple' ? 'bg-purple-100' :
-                  'bg-pink-100'
+                {/* Card */}
+                <div className={`relative bg-white/5 backdrop-blur-xl rounded-3xl overflow-hidden border border-white/10 hover:border-white/30 transition-all duration-500 h-full ${
+                  hoveredCard === index ? 'scale-105 shadow-2xl' : ''
                 }`}>
-                  {track.icon}
+                  {/* Image Header with Gradient Overlay */}
+                  <div className="relative h-56 overflow-hidden">
+                    <Image
+                      src={track.image}
+                      alt={track.title}
+                      fill
+                      className={`object-cover transition-transform duration-700 ${
+                        hoveredCard === index ? 'scale-110' : 'scale-100'
+                      }`}
+                    />
+                    <div className={`absolute inset-0 bg-gradient-to-t ${track.gradient} opacity-60 mix-blend-multiply`}></div>
+                    <div className="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/50 to-transparent"></div>
+
+                    {/* Icon Badge */}
+                    <div className="absolute top-6 left-6">
+                      <div className={`w-16 h-16 rounded-2xl bg-white/20 backdrop-blur-xl border border-white/30 flex items-center justify-center text-4xl transform transition-transform duration-500 ${
+                        hoveredCard === index ? 'rotate-12 scale-110' : ''
+                      }`}>
+                        {track.icon}
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Content */}
+                  <div className="p-8">
+                    {/* Title with Animated Underline */}
+                    <h3 className={`text-2xl sm:text-3xl font-bold mb-6 text-transparent bg-clip-text bg-gradient-to-r ${track.gradient} relative inline-block`}>
+                      {track.title}
+                      <span className={`absolute bottom-0 left-0 h-1 bg-gradient-to-r ${track.gradient} transition-all duration-500 ${
+                        hoveredCard === index ? 'w-full' : 'w-0'
+                      }`}></span>
+                    </h3>
+
+                    {/* Features */}
+                    <ul className="space-y-4">
+                      {track.features.map((feature, featureIndex) => (
+                        <li
+                          key={featureIndex}
+                          className={`flex items-start transition-all duration-300 ${
+                            hoveredCard === index ? 'translate-x-2' : ''
+                          }`}
+                          style={{ transitionDelay: `${featureIndex * 50}ms` }}
+                        >
+                          <div className={`flex-shrink-0 w-6 h-6 rounded-full bg-gradient-to-r ${track.gradient} flex items-center justify-center mr-3 mt-0.5`}>
+                            <svg className="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 20 20">
+                              <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                            </svg>
+                          </div>
+                          <span className="text-gray-200 leading-relaxed">{feature}</span>
+                        </li>
+                      ))}
+                    </ul>
+
+                    {/* Hover Effect Border */}
+                    <div className={`absolute inset-0 rounded-3xl bg-gradient-to-r ${track.gradient} opacity-0 group-hover:opacity-20 transition-opacity duration-500 pointer-events-none`}></div>
+                  </div>
+
+                  {/* Animated Border Glow */}
+                  <div className={`absolute inset-0 rounded-3xl transition-opacity duration-500 ${
+                    hoveredCard === index ? 'opacity-100' : 'opacity-0'
+                  }`}>
+                    <div className={`absolute inset-0 rounded-3xl bg-gradient-to-r ${track.gradient} blur-xl opacity-50`}></div>
+                  </div>
                 </div>
-
-                {/* Title */}
-                <h3 className={`text-2xl font-bold mb-6 ${
-                  track.color === 'blue' ? 'text-blue-600' :
-                  track.color === 'purple' ? 'text-purple-600' :
-                  'text-pink-600'
-                }`}>
-                  {track.title}
-                </h3>
-
-                {/* Features */}
-                <ul className="space-y-4">
-                  {track.features.map((feature, featureIndex) => (
-                    <li key={featureIndex} className="flex items-start">
-                      <svg className={`w-5 h-5 mt-0.5 mr-3 flex-shrink-0 ${
-                        track.color === 'blue' ? 'text-blue-500' :
-                        track.color === 'purple' ? 'text-purple-500' :
-                        'text-pink-500'
-                      }`} fill="currentColor" viewBox="0 0 20 20">
-                        <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
-                      </svg>
-                      <span className="text-gray-700">{feature}</span>
-                    </li>
-                  ))}
-                </ul>
               </div>
             ))}
           </div>
