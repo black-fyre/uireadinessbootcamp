@@ -1,7 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
-import { useRouter, useSearchParams } from 'next/navigation';
+import { useEffect, useState, Suspense } from 'react';
 
 // Extend Window interface to include PaystackPop
 declare global {
@@ -29,15 +28,13 @@ declare global {
   }
 }
 
-export default function PaymentPage() {
+function PaymentForm() {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [phone, setPhone] = useState('');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
   const [scriptLoaded, setScriptLoaded] = useState(false);
-  const router = useRouter();
-  const searchParams = useSearchParams();
 
   useEffect(() => {
     // Load Paystack inline script
@@ -288,5 +285,20 @@ export default function PaymentPage() {
         </div>
       </div>
     </div>
+  );
+}
+
+export default function PaymentPage() {
+  return (
+    <Suspense fallback={
+      <div className="min-h-screen bg-gradient-to-br from-slate-900 via-blue-950 to-slate-900 flex items-center justify-center">
+        <div className="text-white text-center">
+          <div className="inline-block animate-spin rounded-full h-12 w-12 border-b-2 border-white mb-4"></div>
+          <p>Loading payment page...</p>
+        </div>
+      </div>
+    }>
+      <PaymentForm />
+    </Suspense>
   );
 }
