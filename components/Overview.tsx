@@ -53,7 +53,7 @@ export default function Overview() {
                 </div>
                 <div className="ml-4">
                   <h3 className="text-lg font-semibold text-gray-900 mb-2">Date & Time</h3>
-                  <p className="text-gray-700">Friday, 17th January 2025</p>
+                  <p className="text-gray-700">Saturday, 17th January 2025</p>
                   <p className="text-gray-700">12:00 PM - 6:00 PM</p>
                 </div>
               </div>
