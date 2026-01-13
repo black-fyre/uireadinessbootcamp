@@ -1,6 +1,8 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import Image from 'next/image';
+import Link from 'next/link';
 
 export default function Header() {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -22,11 +24,18 @@ export default function Header() {
     >
       <nav className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16 sm:h-20">
-          <div className="flex-shrink-0">
+          <Link href="/" className="flex items-center gap-3 flex-shrink-0">
+            <Image
+              src="/logo.svg"
+              alt="UI Career Bootcamp Logo"
+              width={40}
+              height={40}
+              className="w-8 h-8 sm:w-10 sm:h-10"
+            />
             <h1 className="text-lg sm:text-xl font-bold text-gray-900">
               UI Career <span className="text-blue-600">Bootcamp</span>
             </h1>
-          </div>
+          </Link>
 
           <div className="hidden md:flex items-center space-x-8">
             <a href="#overview" className="text-gray-700 hover:text-blue-600 transition-colors">

@@ -1,0 +1,33 @@
+<svg width="200" height="200" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background Circle -->
+  <circle cx="100" cy="100" r="95" fill="url(#gradient1)" />
+
+  <!-- Gradient Definitions -->
+  <defs>
+    <linearGradient id="gradient1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#2563eb;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#7c3aed;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="gradient2" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#60a5fa;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#a78bfa;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+
+  <!-- "UI" Letters -->
+  <text x="50" y="125" font-family="Arial, sans-serif" font-size="90" font-weight="bold" fill="white">UI</text>
+
+  <!-- Graduation Cap Icon -->
+  <g transform="translate(120, 50)">
+    <!-- Cap base -->
+    <path d="M 0 15 L 30 5 L 60 15 L 30 25 Z" fill="white" opacity="0.95"/>
+    <!-- Cap top -->
+    <path d="M 30 5 L 30 40 L 20 45 L 20 20 Z" fill="white" opacity="0.8"/>
+    <!-- Tassel -->
+    <circle cx="30" cy="5" r="3" fill="#fbbf24"/>
+    <line x1="30" y1="5" x2="30" y2="0" stroke="#fbbf24" stroke-width="2"/>
+  </g>
+
+  <!-- Accent line -->
+  <path d="M 40 140 L 160 140" stroke="url(#gradient2)" stroke-width="4" stroke-linecap="round"/>
+</svg>
