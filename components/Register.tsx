@@ -54,7 +54,7 @@ export default function Register() {
 
           {/* CTA Button */}
           <a
-            href="https://bit.ly/uicareerbootcamp"
+            href="https://selar.com/1zx158t327"
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center justify-center px-10 py-5 text-xl font-bold text-blue-600 bg-white rounded-full hover:bg-gray-50 transition-all duration-300 transform hover:scale-105 shadow-2xl group"
@@ -66,7 +66,7 @@ export default function Register() {
           </a>
 
           <p className="mt-6 text-white/80 text-sm">
-            Registration link: <span className="font-mono">bit.ly/uicareerbootcamp</span>
+            Secure payment powered by Selar
           </p>
 
           {/* Event Details Recap */}

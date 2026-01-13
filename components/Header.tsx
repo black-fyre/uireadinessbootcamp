@@ -44,7 +44,9 @@ export default function Header() {
           </div>
 
           <a
-            href="#register"
+            href="https://selar.com/1zx158t327"
+            target="_blank"
+            rel="noopener noreferrer"
             className="bg-blue-600 text-white px-4 sm:px-6 py-2 rounded-full hover:bg-blue-700 transition-colors text-sm sm:text-base font-medium"
           >
             Register Now

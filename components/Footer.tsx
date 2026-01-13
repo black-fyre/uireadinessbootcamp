@@ -59,7 +59,7 @@ export default function Footer() {
                 </div>
                 <div className="pt-3">
                   <a
-                    href="https://bit.ly/uicareerbootcamp"
+                    href="https://selar.com/1zx158t327"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="inline-block bg-blue-600 text-white px-5 py-2 rounded-full hover:bg-blue-700 transition-colors text-sm font-medium"
